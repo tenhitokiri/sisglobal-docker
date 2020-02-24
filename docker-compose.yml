@@ -1,3 +1,26 @@
+nginx-proxy:
+    image: jwilder/nginx-proxy
+    restart: always
+    ports: 
+        - "80:80"
+        - "443:443"
+    volumes:
+        - /var/run/docker.sock:/tmp/docker.sock:ro
+        - /data/certs/:/etc/nginx/certs:ro
+        - /etc/nginx/vhost.d
+        - /usr/share/nginx/html
+    labels:
+        - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_prox
+
+letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: always
+    volumes:
+        - /data/certs:/etc/nginx/certs:rw
+        - /var/run/docker.sock:/var/run/docker.sock:ro
+    volumes_from:
+        - nginx-proxy:rw
+
 nginx:
     image: tutum/nginx
     restart: always
@@ -11,11 +34,14 @@ nginx:
         - ./logs/front/nginx-error.log:/var/log/nginx/error.log
         - ./logs/front/nginx-access.log:/var/log/nginx/access.log
 
-    ports:
-        - "80:80"
+    expose:
+        - 80
+        - 443
         
     environment:
-        - VIRTUAL_HOST=sisglobal.local,www.sisglobal.local,localhost
+        - VIRTUAL_HOST=sisglobal.local,www.sisglobal.local
+        - LETSENCRYPT_HOST=sisglobal.local,www.sisglobal.local
+        - LETSENCRYPT_EMAIL=sysadm2.acero@gmail.com
 
 phpfpm:
     image: php:7-fpm
@@ -38,11 +64,14 @@ nginxback:
         - ./logs/back/nginx-error.log:/var/log/nginx/error.log
         - ./logs/back/nginx-access.log:/var/log/nginx/access.log
 
-    ports:
-        - "8080:80"
+    expose:
+        - 80
+        - 443
         
     environment:
-        - VIRTUAL_HOST=sisglobal.local,www.sisglobal.local,localhost
+        - VIRTUAL_HOST=backsisglobal.local,www.backsisglobal.local
+        - LETSENCRYPT_HOST=backsisglobal.local,www.backsisglobal.local
+        - LETSENCRYPT_EMAIL=sysadm2.acero@gmail.com
 
 phpfpm2:
     image: php:7-fpm
