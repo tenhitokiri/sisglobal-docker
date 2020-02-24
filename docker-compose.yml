@@ -88,3 +88,20 @@ mysql:
         MYSQL_ROOT_PASSWORD: admin
     ports:
         - "3306:3306" 
+
+node-api:
+    image: node:12
+    restart: always
+    ports: 
+        - "8001:8000"
+    volumes: 
+        - ./nodebackend:/app
+    environment:
+        - DB_CONNECT = mongodb+srv://tenhitokiri:En1el2es1@cluster0-zfj4f.mongodb.net/jwt?retryWrites=true&w=majority
+        - PORT = 8000
+        - TOKEN_SECRET = slkdjfsladkfjlsdae
+    
+    working_dir: /app
+    command: npm start
+
+

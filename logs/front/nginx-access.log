@@ -16,3 +16,8 @@
 172.17.0.2 - - [24/Feb/2020:16:22:22 +0000] "GET / HTTP/1.1" 200 22888 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0"
 172.17.0.2 - - [24/Feb/2020:16:22:34 +0000] "GET / HTTP/1.1" 200 22891 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0"
 172.17.0.2 - - [24/Feb/2020:16:22:35 +0000] "GET / HTTP/1.1" 200 22889 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0"
+172.17.0.3 - - [24/Feb/2020:20:05:52 +0000] "GET / HTTP/1.1" 200 22856 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0"
+172.17.0.3 - - [24/Feb/2020:20:05:52 +0000] "GET /favicon.ico HTTP/1.1" 499 0 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0"
+172.17.0.3 - - [24/Feb/2020:20:06:19 +0000] "GET / HTTP/1.1" 200 22903 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0"
+172.17.0.3 - - [24/Feb/2020:20:06:19 +0000] "GET /favicon.ico HTTP/1.1" 200 22877 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0"
+172.17.0.6 - - [24/Feb/2020:20:16:27 +0000] "GET / HTTP/1.1" 200 22863 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0"
