@@ -1,0 +1,61 @@
+nginx:
+    image: tutum/nginx
+    restart: always
+
+    links:
+        - phpfpm
+    volumes:
+        - ./nginx/front/default:/etc/nginx/sites-available/default
+        - ./nginx/front/default:/etc/nginx/sites-enabled/default
+
+        - ./logs/front/nginx-error.log:/var/log/nginx/error.log
+        - ./logs/front/nginx-access.log:/var/log/nginx/access.log
+
+    ports:
+        - "80:80"
+        
+    environment:
+        - VIRTUAL_HOST=sisglobal.local,www.sisglobal.local,localhost
+
+phpfpm:
+    image: php:7-fpm
+    restart: always
+    expose:
+        - 9000
+    volumes:
+        - ./frontend:/usr/share/nginx/html
+
+nginxback:
+    image: tutum/nginx
+    restart: always
+
+    links:
+        - phpfpm2
+    volumes:
+        - ./nginx/back/default:/etc/nginx/sites-available/default
+        - ./nginx/back/default:/etc/nginx/sites-enabled/default
+
+        - ./logs/back/nginx-error.log:/var/log/nginx/error.log
+        - ./logs/back/nginx-access.log:/var/log/nginx/access.log
+
+    ports:
+        - "8080:80"
+        
+    environment:
+        - VIRTUAL_HOST=sisglobal.local,www.sisglobal.local,localhost
+
+phpfpm2:
+    image: php:7-fpm
+    restart: always
+    expose:
+        - 9000
+    volumes:
+        - ./backend:/usr/share/nginx/html
+
+mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+        MYSQL_ROOT_PASSWORD: admin
+    ports:
+        - "3306:3306" 
