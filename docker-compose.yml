@@ -102,6 +102,6 @@ node-api:
         - TOKEN_SECRET = slkdjfsladkfjlsdae
     
     working_dir: /app
-    command: npm start
+    command: bash -c "npm install && npm run dev"
 
 
