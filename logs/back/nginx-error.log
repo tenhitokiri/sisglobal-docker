@@ -1,2 +1,48 @@
 2020/02/24 15:09:54 [emerg] 1#0: host not found in upstream "phpfpm" in /etc/nginx/sites-enabled/default:17
 2020/02/24 15:10:02 [emerg] 1#0: host not found in upstream "phpfpm" in /etc/nginx/sites-enabled/default:17
+2020/02/24 23:58:34 [alert] 1#0: worker process 7 exited on signal 9
+2020/02/24 23:58:34 [alert] 1#0: worker process 6 exited on signal 9
+2020/02/24 23:58:34 [alert] 1#0: worker process 8 exited on signal 9
+2020/02/24 23:58:34 [alert] 1#0: worker process 9 exited on signal 9
+2020/02/25 21:56:58 [alert] 1#0: worker process 8 exited on signal 9
+2020/02/25 21:56:58 [alert] 1#0: worker process 6 exited on signal 9
+2020/02/25 21:56:58 [alert] 1#0: worker process 7 exited on signal 9
+2020/02/25 21:56:58 [alert] 1#0: worker process 9 exited on signal 9
+2020/02/25 21:57:44 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 21:57:55 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 21:58:02 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 21:58:09 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 21:58:18 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 21:58:22 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 21:58:27 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 21:58:34 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 21:58:49 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 21:59:16 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:00:09 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:01:10 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:02:12 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:03:13 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:04:15 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:05:16 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:06:18 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:07:28 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:07:33 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:07:41 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:07:46 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:07:49 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:07:57 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:08:10 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:08:23 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:08:37 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:09:05 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:09:58 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:11:26 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:11:36 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:11:47 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:11:56 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:12:04 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:12:11 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:12:18 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:12:29 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:12:45 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
+2020/02/25 22:13:13 [emerg] 1#0: invalid number of arguments in "fastcgi_index" directive in /etc/nginx/sites-enabled/default:18
