@@ -82,18 +82,21 @@ phpfpm2:
         - ./backend:/usr/share/nginx/html
 
 mysql:
-    image: mysql:latest
+    image: mysql:5.7
     restart: always
     environment:
-        MYSQL_ROOT_PASSWORD: admin
+        MYSQL_ROOT_PASSWORD: .4C3r04dm1n
     ports:
         - "3306:3306" 
+    volumes:
+        - /home/tenhitokiri/data/mysql/lib:/var/lib/mysql
+        - /home/tenhitokiri/data/mysql/settings/:/etc/mysql/   
 
 node-api:
     image: node:12
     restart: always
     ports: 
-        - "8001:8000"
+        - "8001:8001"
     volumes: 
         - ./nodebackend:/app
     environment:
