@@ -1,110 +1,85 @@
-nginx-proxy:
-    image: jwilder/nginx-proxy
-    restart: always
-    ports: 
-        - "80:80"
-        - "443:443"
-    volumes:
-        - /var/run/docker.sock:/tmp/docker.sock:ro
-        - /data/certs/:/etc/nginx/certs:ro
-        - /etc/nginx/vhost.d
-        - /usr/share/nginx/html
-    labels:
-        - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_prox
+version: '3.1'
 
-letsencrypt:
-    image: jrcs/letsencrypt-nginx-proxy-companion
-    restart: always
-    volumes:
-        - /data/certs:/etc/nginx/certs:rw
-        - /var/run/docker.sock:/var/run/docker.sock:ro
-    volumes_from:
-        - nginx-proxy:rw
+services:
+    nginx-proxy:
+        image: jwilder/nginx-proxy
+        container_name: nginx_proxy
+        restart: always
+        ports: 
+            - "80:80"
+            - "443:443"
+        volumes:
+            - /var/run/docker.sock:/tmp/docker.sock:ro
+            - /data/certs/:/etc/nginx/certs:ro
+            - /etc/nginx/vhost.d
+            - /usr/share/nginx/html
+        labels:
+            - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_prox
 
-nginx:
-    image: tutum/nginx
-    restart: always
+    nginx-front:
+        image: tutum/nginx
+        container_name: nginx_front
+        restart: always
+        volumes:
+            - ./nginx/front/default:/etc/nginx/sites-available/default
+            - ./nginx/front/default:/etc/nginx/sites-enabled/default
 
-    links:
-        - phpfpm
-    volumes:
-        - ./nginx/front/default:/etc/nginx/sites-available/default
-        - ./nginx/front/default:/etc/nginx/sites-enabled/default
+            - ./logs/front/nginx-error.log:/var/log/nginx/error.log
+            - ./logs/front/nginx-access.log:/var/log/nginx/access.log
+        expose:
+            - 80
+            - 443
+        environment:
+            - VIRTUAL_HOST=sisglobal.local,www.sisglobal.local, localhost, 127.0.0.1
+            - LETSENCRYPT_HOST=sisglobal.local,www.sisglobal.local
+            - LETSENCRYPT_EMAIL=sysadm2.acero@gmail.com
 
-        - ./logs/front/nginx-error.log:/var/log/nginx/error.log
-        - ./logs/front/nginx-access.log:/var/log/nginx/access.log
+    nginx-back:
+        image: tutum/nginx
+        container_name: nginx_back
+        restart: always
 
-    expose:
-        - 80
-        - 443
+        links:
+            - phpfpm
+        volumes:
+            - ./nginx/back/default:/etc/nginx/sites-available/default
+            - ./nginx/back/default:/etc/nginx/sites-enabled/default
+
+            - ./logs/back/nginx-error.log:/var/log/nginx/error.log
+            - ./logs/back/nginx-access.log:/var/log/nginx/access.log
+
+        expose:
+            - 80
+            - 443
+            
+        environment:
+            - VIRTUAL_HOST=backsisglobal.local,www.backsisglobal.local
+            - LETSENCRYPT_HOST=backsisglobal.local,www.backsisglobal.local
+            - LETSENCRYPT_EMAIL=sysadm2.acero@gmail.com
+
+    phpfpm:
+        image: php:7-fpm
+        container_name: php7_fpm
+        restart: always
+        expose:
+            - 9000
+        volumes:
+            - ./backend:/usr/share/nginx/html
+
+    node-api:
+        image: node:12
+        container_name: node_api
+        restart: always
+        ports: 
+            - "8001:8001"
+        volumes: 
+            - ./nodebackend:/app
+        environment:
+            - DB_CONNECT=mongodb+srv://tenhitokiri:En1el2es1@cluster0-zfj4f.mongodb.net/jwt?retryWrites=true&w=majority
+            - PORT=8001
+            - TOKEN_SECRET=slkdjfsladkfjlsdae
         
-    environment:
-        - VIRTUAL_HOST=sisglobal.local,www.sisglobal.local
-        - LETSENCRYPT_HOST=sisglobal.local,www.sisglobal.local
-        - LETSENCRYPT_EMAIL=sysadm2.acero@gmail.com
-
-phpfpm:
-    image: php:7-fpm
-    restart: always
-    expose:
-        - 9000
-    volumes:
-        - ./frontend:/usr/share/nginx/html
-
-nginxback:
-    image: tutum/nginx
-    restart: always
-
-    links:
-        - phpfpm2
-    volumes:
-        - ./nginx/back/default:/etc/nginx/sites-available/default
-        - ./nginx/back/default:/etc/nginx/sites-enabled/default
-
-        - ./logs/back/nginx-error.log:/var/log/nginx/error.log
-        - ./logs/back/nginx-access.log:/var/log/nginx/access.log
-
-    expose:
-        - 80
-        - 443
-        
-    environment:
-        - VIRTUAL_HOST=backsisglobal.local,www.backsisglobal.local
-        - LETSENCRYPT_HOST=backsisglobal.local,www.backsisglobal.local
-        - LETSENCRYPT_EMAIL=sysadm2.acero@gmail.com
-
-phpfpm2:
-    image: php:7-fpm
-    restart: always
-    expose:
-        - 9000
-    volumes:
-        - ./backend:/usr/share/nginx/html
-
-mysql:
-    image: mysql:5.7
-    restart: always
-    environment:
-        MYSQL_ROOT_PASSWORD: .4C3r04dm1n
-    ports:
-        - "3306:3306" 
-    volumes:
-        - /home/tenhitokiri/data/mysql/lib:/var/lib/mysql
-        - /home/tenhitokiri/data/mysql/settings/:/etc/mysql/   
-
-node-api:
-    image: node:12
-    restart: always
-    ports: 
-        - "8001:8001"
-    volumes: 
-        - ./nodebackend:/app
-    environment:
-        - DB_CONNECT=mongodb+srv://tenhitokiri:En1el2es1@cluster0-zfj4f.mongodb.net/jwt?retryWrites=true&w=majority
-        - PORT=8001
-        - TOKEN_SECRET=slkdjfsladkfjlsdae
-    
-    working_dir: /app
-    command: bash -c "npm install && npm run dev"
+        working_dir: /app
+        command: bash -c "npm install && npm run dev"
 
 
