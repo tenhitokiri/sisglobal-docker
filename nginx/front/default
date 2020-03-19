@@ -1,22 +1,17 @@
 server {
-    listen  80;
+	listen 80 default_server;
+	listen [::]:80 default_server ipv6only=on;
 
-    # this path MUST be exactly as docker-compose.fpm.volumes,
-    # even if it doesn't exists in this dock.
-    root /usr/share/nginx/html;
-    index index.php index.html index.html;
-    
-    server_name 192.168.0.54;
+	root /usr/share/nginx/html;
+	index index.html index.htm;
 
-    location / {
-        try_files $uri /index.php$is_args$args;
-    }
+	# Make site accessible from http://localhost/
+	server_name localhost;
 
-    location ~ \.php$ {
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass phpfpm:9000; 
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        include fastcgi_params;
-    }
-}
+	location / {
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+		try_files $uri $uri/ =404;
+		# Uncomment to enable naxsi on this location
+		# include /etc/nginx/naxsi.rules
+	}

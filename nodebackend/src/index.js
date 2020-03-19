@@ -37,10 +37,16 @@ app.use('/api/users', rutaAuth);
 const rutaPost = require('./routes/posts');
 app.use('/api/posts', rutaPost);
 
+app.use('/api/', (req, res) => {
+    res.status(401).send({
+        'err': 'rutas disponibles: /auth /posts'
+    })
+})
+
 app.use('/',
     (req, res) => {
         res.status(401).send({
-            'err': 'error de ruta, trata de nuevo'
+            'err': 'error de ruta, trata de nuevo. la ruta de la api esta en /api/'
         })
     }
 )
