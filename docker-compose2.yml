@@ -32,7 +32,7 @@ services:
         expose:
             - 80
         environment:
-            - VIRTUAL_HOST= localhost, thk-pc-01
+            - VIRTUAL_HOST= localhost, 127.0.0.1, 192.168.0.53
         networks:
             - webnet            
                             
@@ -54,7 +54,7 @@ services:
             - 8080
             
         environment:
-            - VIRTUAL_HOST=127.0.0.1, 192.168.0.53
+            - VIRTUAL_HOST=backsisglobal.local,www.backsisglobal.local
 
         networks:
             - webnet            

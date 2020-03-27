@@ -1,18 +1,21 @@
+#Version del docker compose
 version: "3.3"
 
 services:
+    #Servidor proxy que resuelve y presenta los demás servicios
     nginx-proxy:
         image: jwilder/nginx-proxy
         container_name: nginx_proxy
         restart: always
         ports: 
-            - "80:80"
+            #Solo se hace bind al puerto 80 del proxy para que pueda ser 
+            #visto desde fuera del contenedor
+            - "80:80" 
         volumes:
             - /var/run/docker.sock:/tmp/docker.sock:ro
             - /data/certs/:/etc/nginx/certs:ro
             - /etc/nginx/vhost.d
             - /usr/share/nginx/html
-            - ./nginx/proxy/:/etc/nginx/conf.d/:rw
             - ./logs/proxy/nginx-error.log:/var/log/nginx/error.log:rw
             - ./logs/proxy/nginx-access.log:/var/log/nginx/access.log:rw
 
@@ -22,17 +25,28 @@ services:
             - webnet            
             
     nginx-front:
+        #Contenedor del Frontend de la aplicación, NO ejecuta código de backend
         image: tutum/nginx
         container_name: nginx_front
         restart: always
         volumes:
+            # Los archivos del front deben copiarse en la carpeta /frontend
             - ./frontend:/app
             - ./logs/front/nginx-error.log:/var/log/nginx/error.log
             - ./logs/front/nginx-access.log:/var/log/nginx/access.log
         expose:
+            #Solo se expone el puerto a la red de docker, no hacia afuera
+            #El proxy se encargará de redireccionar al contenedor que corresponda
             - 80
         environment:
-            - VIRTUAL_HOST= localhost, 127.0.0.1, 192.168.0.53
+            # Nombre del host virtual que usará el proxy para mostrar el contenido
+            # Accediendo a http://localhost o http://thk-pc-01 se podrá ver el front
+            # Hay que cambiar el host por el uname del equipo donde corra el contenedor
+            - VIRTUAL_HOST= localhost, thk-pc-01
+            # Variable de entorno para acceder a los endpoints del back de php, debe ser el mismo 
+            # container_name que el contenedor
+            - BACK_PHP= nginx_back
+            - BACK_NODE1= node_api
         networks:
             - webnet            
                             
@@ -51,22 +65,29 @@ services:
             - ./logs/back/nginx-access.log:/var/log/nginx/access.log
 
         expose:
+            #Solo se expone el puerto a la red de docker, no hacia afuera
+            #El proxy se encargará de redireccionar al contenedor que corresponda
             - 8080
             
         environment:
-            - VIRTUAL_HOST=backsisglobal.local,www.backsisglobal.local
+            # Nombre del host virtual que usará el proxy para mostrar el contenido
+            # Accediendo a http://127.0.0.1 o http://192.168.0.53 se podrá ver el back
+            # Hay que cambiar el host por el uname del equipo donde corra el contenedor
+            - VIRTUAL_HOST=127.0.0.1, 192.168.0.53
 
         networks:
             - webnet            
     
 
     phpfpm:
+        # interprete de php conectado al nginx del backend
         image: php:7-fpm
         container_name: php7_fpm
         restart: always
         expose:
             - 9000
         volumes:
+            # Los archivos del BACK deben copiarse en la carpeta /backend
             - ./backend:/usr/share/nginx/html
         networks:
             - webnet            
@@ -75,13 +96,14 @@ services:
         image: node:12
         container_name: node_api
         restart: always
-        ports: 
-            - "8001:8001"
+        expose: 
+            #El puerto expuesto en el caso de node debe ser el mismo por el que corre la app 
+            - "8001"
         volumes: 
             - ./nodebackend:/app
         environment:
             - DB_CONNECT=mongodb+srv://tenhitokiri:En1el2es1@cluster0-zfj4f.mongodb.net/jwt?retryWrites=true&w=majority
-            - PORT=8001
+            - PORT=8001 # debe ser el mismo puerto expuesto
             - TOKEN_SECRET=slkdjfsladkfjlsdae
         
         working_dir: /app
