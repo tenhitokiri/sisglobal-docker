@@ -1,6 +1,2 @@
-192.168.208.4 - - [19/Mar/2020:23:06:01 +0000] "GET / HTTP/1.1" 200 23322 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.136 Safari/537.36"
-192.168.224.3 - - [19/Mar/2020:23:08:14 +0000] "GET / HTTP/1.1" 200 23260 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.136 Safari/537.36"
-192.168.240.5 - - [19/Mar/2020:23:09:04 +0000] "GET / HTTP/1.1" 200 22906 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0"
-192.168.240.5 - - [19/Mar/2020:23:09:21 +0000] "GET / HTTP/1.1" 200 22901 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0"
-172.18.0.5 - - [19/Mar/2020:23:11:56 +0000] "GET / HTTP/1.1" 200 23061 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:74.0) Gecko/20100101 Firefox/74.0"
-172.18.0.5 - - [19/Mar/2020:23:11:57 +0000] "GET /favicon.ico HTTP/1.1" 200 23024 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:74.0) Gecko/20100101 Firefox/74.0"
+172.22.0.2 - - [27/Mar/2020:17:46:59 +0000] "GET / HTTP/1.1" 200 22849 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0"
+172.22.0.2 - - [27/Mar/2020:17:46:59 +0000] "GET /favicon.ico HTTP/1.1" 200 22822 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0"

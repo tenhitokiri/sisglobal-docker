@@ -1,1 +1,1 @@
-mkdir -p logs/{back,front} && touch logs/{back,front}/nginx-{access,error}.log
+mkdir -p logs/{back,front,proxy} && touch logs/{back,front,proxy}/nginx-{access,error}.log
